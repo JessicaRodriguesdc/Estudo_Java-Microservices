@@ -1,0 +1,2 @@
+Para rodar o arquivo stack basta:
+    docker-compose -f stack.yml up
