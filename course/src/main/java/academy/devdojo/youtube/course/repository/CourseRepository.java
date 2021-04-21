@@ -1,4 +1,7 @@
 package academy.devdojo.youtube.course.repository;
 
-public interface CourseRepository {
+import academy.devdojo.youtube.course.model.Course;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface CourseRepository extends PagingAndSortingRepository<Course,Long>{
 }

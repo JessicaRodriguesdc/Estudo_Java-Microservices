@@ -1,4 +1,7 @@
 package academy.devdojo.youtube.course.model;
 
-public interface AbstractEntity  {
+import java.io.Serializable;
+
+public interface AbstractEntity extends Serializable {
+    Long getId();
 }
