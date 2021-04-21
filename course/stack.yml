@@ -1,0 +1,25 @@
+# Use rout/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3308:3306
+#    restart: always
+    environment:
+#      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: devdojo
+    volumes:
+      - microserices_devdojo:/var/lib/mysql
+
+volumes:
+  microserices_devdojo:
+
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
