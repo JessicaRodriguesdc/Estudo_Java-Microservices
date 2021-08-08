@@ -41,11 +41,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.nimbusds</groupId>-->
-<!--            <artifactId>nimbus-jose-jwt</artifactId>-->
-<!--            <version>${nimbus-jose.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${nimbus-jose.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -110,8 +110,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
     <dependencyManagement>
         <dependencies>
             <dependency>
