@@ -12,35 +12,37 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 @Slf4j
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserDetailsServiceImpl implements UserDetailsService {
-
-    private ApplicationUserRepository applicationUserRepository;
+    private final ApplicationUserRepository applicationUserRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username){
-        log.info("Searching in the DB the user by username '{}'",username);
+    public UserDetails loadUserByUsername(String username) {
+        log.info("Searching in the DB the user by username '{}'", username);
+
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
-        log.info("ApplicationUser found '{}'",applicationUser);
-        if(applicationUser == null){
-            throw new UsernameNotFoundException(String.format("Application User '%s' not found", username));
-        }
+
+        log.info("ApplicationUser found '{}'", applicationUser);
+
+        if (applicationUser == null)
+            throw new UsernameNotFoundException(String.format("Application user '%s' not found", username));
 
         return new CustomUserDetails(applicationUser);
     }
 
     private static final class CustomUserDetails extends ApplicationUser implements UserDetails {
-        public CustomUserDetails(ApplicationUser applicationUser) {
+        CustomUserDetails(@NotNull ApplicationUser applicationUser) {
             super(applicationUser);
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_"+this.getRole());
+            return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_" + this.getRole());
         }
 
         @Override
